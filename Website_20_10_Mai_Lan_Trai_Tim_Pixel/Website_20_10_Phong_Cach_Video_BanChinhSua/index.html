@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Happy 20/10 ♥</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff69d2;--hot:#ff2ba6;--cream:#ffe5f4}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;width:100%;font-family:"Courier New",monospace;background:#000;color:var(--cream)}
+body{min-height:100svh;overflow:hidden}
+#ambient{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;background:#000}
+.scene{position:relative;min-height:100svh;width:100%;display:grid;place-items:center;padding:20px;background:#000;isolation:isolate}
+.panel{position:relative;width:min(900px,100%);height:min(760px,calc(100svh - 100px));min-height:460px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;border:1px solid #ff6dc766;border-radius:0;transform:none;background:#090308;box-shadow:0 0 30px #ff168a20,inset 0 0 50px #ff168a10}
+.matrix{position:absolute;inset:0;width:100%;height:100%;opacity:.88}
+.content{position:relative;z-index:2;width:100%;padding:34px 22px;max-width:1100px;margin:auto}
+.countdown{font-family:"Pixelify Sans","Courier New",monospace;color:#ff8cda;font-size:clamp(6rem,28vw,12rem);font-weight:600;line-height:1;letter-spacing:-.035em;text-shadow:3px 3px 0 #a51b79,0 0 8px #ff70d1,0 0 28px #ff2ba6;transform:scaleX(.84);animation:pulse .9s ease-in-out infinite alternate}
+.count-label{display:none!important}
+h1{font-family:"Pixelify Sans","Courier New",monospace;font-size:clamp(3.2rem,11vw,7.8rem);font-weight:600;line-height:1.08;margin:0 auto 10px;letter-spacing:-.025em;color:#ff8cda;text-shadow:2px 2px 0 #a51b79,0 0 3px #fff,0 0 12px #ff69c9,0 0 28px #ff2ba6;opacity:0;transform:translateY(18px) scaleX(.86) scaleY(.96);transition:opacity .8s,transform .8s;max-width:760px;overflow-wrap:anywhere}
+h1.visible{opacity:1;transform:translateY(0) scaleX(.86) scaleY(1)}
+h1 .line{display:block}
+/* Font pixel kiểu game, gần với mẫu người dùng gửi */
+h1,#message{ -webkit-font-smoothing:none; text-rendering:geometricPrecision; }
+.subtitle{display:none!important;font-size:clamp(1.05rem,3.3vw,1.7rem);color:#fff0f8;text-shadow:0 0 12px #ff71bb;margin:20px 0 0;opacity:0;transition:opacity 1s .2s}
+.subtitle.visible{opacity:1}
+#message{min-height:3em;max-width:1000px;margin:22px auto 0;font-family:"Pixelify Sans","Courier New",monospace;font-weight:600;font-size:clamp(3rem,10vw,7rem);line-height:1.12;letter-spacing:-.025em;color:#ff8cda;text-shadow:2px 2px 0 #a51b79,0 0 3px #fff,0 0 12px #ff69c9,0 0 28px #ff2ba6;opacity:0;transition:opacity .6s;white-space:pre-wrap;overflow-wrap:anywhere;transform:scaleX(.86)}
+#message.visible{opacity:1}
+.heart{display:inline-block;color:#ff8cda;text-shadow:2px 2px 0 #a51b79,0 0 3px #fff,0 0 12px #ff69c9,0 0 28px #ff2ba6;animation:heartbeat 1.2s infinite}.pixel-heart{display:inline-block;position:relative;width:6px;height:6px;font-size:0;line-height:0;vertical-align:middle;margin:0 42px 0 14px;background:#ff8cda;box-shadow:6px 0 #ff8cda,18px 0 #ff8cda,24px 0 #ff8cda,-6px 6px #ff8cda,0 6px #ff8cda,6px 6px #ff8cda,12px 6px #ff8cda,18px 6px #ff8cda,24px 6px #ff8cda,30px 6px #ff8cda,-6px 12px #ff8cda,0 12px #ff8cda,6px 12px #ff8cda,12px 12px #ff8cda,18px 12px #ff8cda,24px 12px #ff8cda,30px 12px #ff8cda,0 18px #ff8cda,6px 18px #ff8cda,12px 18px #ff8cda,18px 18px #ff8cda,24px 18px #ff8cda,6px 24px #ff8cda,12px 24px #ff8cda,18px 24px #ff8cda,12px 30px #ff8cda;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 7px #ff69c9) drop-shadow(0 0 12px #ff2ba6);animation:heartbeat 1.2s infinite;image-rendering:pixelated;transform:scale(1.15)}
+.progress{height:2px;width:min(300px,72%);margin:20px auto 0;background:#ffffff25;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff81cb,#fff1fa,#ff2cb6);box-shadow:0 0 10px #ff6acb;transition:width .8s}
+.controls{position:fixed;z-index:5;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;display:flex;justify-content:center;gap:10px;padding:0 12px}
+button{font:600 .88rem system-ui,sans-serif;color:#fff0f8;background:#160610;border:1px solid #ffb2d877;border-radius:999px;padding:11px 17px;cursor:pointer}
+button:hover{background:#4a0b30}
+.hint{position:fixed;z-index:3;top:max(14px,env(safe-area-inset-top));left:0;right:0;text-align:center;color:#ffe2f080;font:600 .68rem system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;pointer-events:none}
+.bubble{position:absolute;border:1px solid #ffe4fa99;border-radius:50%;box-shadow:inset -5px -7px 12px #ffb8e944,0 0 14px #ffb8e955;background:radial-gradient(circle at 30% 25%,#fff9,transparent 24%,#ff68b91c 65%,#fff2);animation:float 8s ease-in-out infinite;pointer-events:none}
+.b1{width:42px;height:42px;top:8%;left:7%}.b2{width:24px;height:24px;top:20%;right:7%;animation-delay:-3s}.b3{width:32px;height:32px;bottom:10%;left:12%;animation-delay:-5s}.b4{width:55px;height:55px;bottom:12%;right:8%;animation-delay:-2s}
+.petal{position:fixed;z-index:4;top:-30px;pointer-events:none;color:#ff8cda;font-family:'Pixelify Sans',monospace;font-weight:700;-webkit-font-smoothing:none;animation:fall linear forwards;text-shadow:2px 2px 0 #a51b79,0 0 3px #fff,0 0 12px #ff69c9,0 0 24px #ff2ba6;image-rendering:pixelated}
+@keyframes pulse{to{transform:scale(1.04);filter:brightness(1.25)}}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}@keyframes float{50%{transform:translateY(-14px)}}@keyframes fall{to{transform:translate(var(--drift),110svh) rotate(500deg);opacity:0}}
+@media(max-width:560px){.scene{padding:48px 8px 76px}.panel{width:100%;height:calc(100svh - 140px);min-height:390px}.content{padding:24px 12px}.count-label{letter-spacing:.14em}.controls button{padding:10px 13px;font-size:.8rem}.b1{width:28px;height:28px}.b4{width:38px;height:38px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="ambient"></canvas>
+
+<main class="scene">
+ <section class="panel" aria-live="polite">
+  <canvas class="matrix" id="matrix"></canvas>
+  <i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i><i class="bubble b4"></i>
+  <div class="content">
+   <div id="countdown" class="countdown">3</div>
+   <div id="countLabel" class="count-label">Một điều ngọt ngào đang đến...</div>
+   <h1 id="title" aria-hidden="true"></h1>
+   <p id="subtitle" class="subtitle" aria-hidden="true"></p>
+   <div id="message"></div>
+   <div class="progress"><span id="progressBar"></span></div>
+  </div>
+ </section>
+</main>
+<div class="controls"><button id="replay">↻ Xem lại</button><button class="skip" id="skip">Bỏ qua đếm ngược ↗</button></div>
+<script>
+(()=>{
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const count=document.querySelector('#countdown'),label=document.querySelector('#countLabel'),title=document.querySelector('#title'),sub=document.querySelector('#subtitle'),msg=document.querySelector('#message'),bar=document.querySelector('#progressBar');
+ /*
+  TỰ VIẾT LỜI CHÚC Ở ĐÂY:
+  - Mỗi dòng trong dấu nháy đơn là một câu chúc.
+  - Giữ dấu phẩy, dấu chấm và emoji tùy ý.
+  - Đừng xóa dấu nháy hoặc dấu phẩy cuối mỗi dòng (trừ dòng cuối).
+ */
+ const wishes=[
+  'Chúc Mai Lan 20/10 vui vẻ, hạnh phúc nha',
+  'Học giỏi, xinh đẹp, mau lên cân nha'
+ ];
+ let timer=null,step=0;
+ function showWish(i){
+   msg.classList.remove('visible');
+   setTimeout(()=>{msg.replaceChildren(document.createTextNode(wishes[i]+' '));const heart=document.createElement('span');heart.className='pixel-heart';heart.textContent='♥';msg.append(heart);msg.classList.add('visible');bar.style.width=((i+1)/wishes.length*100)+'%';},reduce?0:180);
+ }
+ function reveal(){
+   clearInterval(timer);count.style.display='none';label.style.display='none';
+   title.classList.remove('visible');sub.classList.remove('visible');step=0;showWish(step);
+   timer=setInterval(()=>{step++;if(step<wishes.length)showWish(step);else clearInterval(timer)},3500);
+ }
+ function start(){
+   clearInterval(timer);step=0;count.style.display='block';label.style.display='block';title.classList.remove('visible');sub.classList.remove('visible');msg.classList.remove('visible');bar.style.width='0%';
+   let n=reduce?1:3;count.textContent=n;label.style.display='none';
+   timer=setInterval(()=>{n--;if(n>0){count.textContent=n;count.animate([{transform:'scale(1.25)',opacity:.4},{transform:'scale(1)',opacity:1}],{duration:400});}
+   else if(n===0){count.innerHTML='<span class="pixel-heart">♥</span>';label.textContent='Dành riêng cho bạn';}
+   else reveal();},1000);
+ }
+ document.querySelector('#replay').addEventListener('click',start);
+ document.querySelector('#skip').addEventListener('click',reveal);
+ const matrix=document.querySelector('#matrix'),mctx=matrix.getContext('2d');let mw=0,mh=0,drops=[];
+ const glyphs='01♥✧·';
+ function resizeMatrix(){const r=matrix.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);mw=r.width;mh=r.height;matrix.width=mw*dpr;matrix.height=mh*dpr;mctx.setTransform(dpr,0,0,dpr,0,0);drops=Array.from({length:Math.ceil(mw/15)},()=>Math.random()*mh/14)}
+ function rain(){mctx.fillStyle='rgba(9,3,8,.13)';mctx.fillRect(0,0,mw,mh);mctx.font='12px monospace';drops.forEach((y,i)=>{mctx.fillStyle=Math.random()>.88?'#ffb6ed':'rgba(255,48,168,.56)';mctx.fillText(glyphs[Math.floor(Math.random()*glyphs.length)],i*15,y*14);if(y*14>mh&&Math.random()>.975)drops[i]=0;drops[i]+=.45+Math.random()*.65});if(!reduce)requestAnimationFrame(rain)}
+ window.addEventListener('resize',resizeMatrix);resizeMatrix();rain();
+ const ambient=document.querySelector('#ambient'),actx=ambient.getContext('2d');let aw,ah,particles=[];
+ function resizeAmbient(){const dpr=Math.min(devicePixelRatio||1,2);aw=innerWidth;ah=innerHeight;ambient.width=aw*dpr;ambient.height=ah*dpr;actx.setTransform(dpr,0,0,dpr,0,0);particles=Array.from({length:Math.min(90,Math.floor(aw/5))},()=>({x:Math.random()*aw,y:Math.random()*ah,r:Math.random()*2+.3,a:Math.random()*.5+.1,s:Math.random()*.25+.05}))}
+ function stars(){actx.clearRect(0,0,aw,ah);particles.forEach(p=>{p.y-=p.s;if(p.y<0)p.y=ah;actx.beginPath();actx.arc(p.x,p.y,p.r,0,6.28);actx.fillStyle=`rgba(255,202,230,${p.a})`;actx.fill()});if(!reduce)requestAnimationFrame(stars)}
+ window.addEventListener('resize',resizeAmbient);resizeAmbient();stars();
+ function petal(){if(document.hidden||reduce)return;const e=document.createElement('span');const isHeart=Math.random()<.7;e.className=isHeart?'petal pixel-heart':'petal';if(isHeart){e.style.width='6px';e.style.height='6px';e.style.fontSize='0';e.style.margin='0';e.style.top='-36px';}else{e.textContent=['✦','✧'][Math.floor(Math.random()*2)];e.style.fontSize=(10+Math.random()*17)+'px';}e.style.left=Math.random()*100+'vw';e.style.setProperty('--drift',(Math.random()*130-65)+'px');e.style.animationDuration=(7+Math.random()*7)+'s';document.body.append(e);setTimeout(()=>e.remove(),15000)}
+ if(!reduce)setInterval(petal,520);
+ start();
+})();
+</script>
+</body>
+</html>

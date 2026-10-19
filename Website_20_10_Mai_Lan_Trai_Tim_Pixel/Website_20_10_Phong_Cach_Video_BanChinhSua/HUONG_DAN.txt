@@ -1,0 +1,9 @@
+WEBSITE CHÚC MỪNG 20/10 - MAI LAN
+
+1. Giải nén thư mục ZIP.
+2. Mở index.html bằng Chrome hoặc Microsoft Edge để chạy website.
+3. Muốn sửa lời chúc, mở index.html trong Visual Studio và tìm phần const wishes.
+4. Lưu bằng Ctrl+S rồi tải lại trang bằng F5.
+
+Đã đổi tên lời chúc thành Mai Lan và đồng bộ trái tim với kiểu chữ pixel hồng.
+Font Pixelify Sans được tải từ Google Fonts nên cần Internet để hiển thị đúng font.
